@@ -137,6 +137,11 @@ jobs:
         echo "Building bookmarks plugin for linux/amd64..."
         GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -buildmode=plugin -o build/bookmarks-linux-amd64.so ./internal/providers/bookmarks
 
+    - name: Build pass plugin for linux/amd64
+      run: |
+        echo "Building pass plugin for linux/amd64..."
+        GOOS=linux GOARCH=amd64 CGO_ENABLED=1 go build -buildmode=plugin -o build/pass-linux-amd64.so ./internal/providers/pass
+
     - name: Upload build artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -222,6 +227,9 @@ jobs:
 
         # Archive bookmarks plugin
         tar -czf bookmarks-linux-amd64.tar.gz bookmarks-linux-amd64.so
+
+        # Archive pass plugin
+        tar -czf pass-linux-amd64.tar.gz pass-linux-amd64.so
 
         echo "Build completed successfully!"
         echo "Created archives:"
